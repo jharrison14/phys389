@@ -10,9 +10,6 @@ def gridCreate(fluid,maxTime):
     deltaX = x/100
     positions = np.arange(0,x+deltaX,deltaX)
 
-    return "Times: %s, Positions: %s" %(times,positions) 
+    return times, positions
 
 
-default = Fluid()
-
-print(gridCreate(default,10))
