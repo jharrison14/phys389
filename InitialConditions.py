@@ -1,4 +1,4 @@
-def line(x,m,c):
-    return m*x + c
+def line(x):
+    return 2*x + 4
 
 

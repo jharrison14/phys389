@@ -1,5 +1,5 @@
 import numpy as np
-import fluid as f
+import Fluid as f
 
 
 def positionInfo(fluid,steps):
@@ -8,7 +8,7 @@ def positionInfo(fluid,steps):
     return x, deltaX
 
 def timeInfo(fluid, steps):
-    t = fluid.maxTtime
+    t = fluid.maxTime
     deltaT = t/steps
     return t, deltaT
 def gridCreate(dx,dt):

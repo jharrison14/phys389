@@ -21,4 +21,4 @@ def test_timesDerivatives():
     deltaT = 0.1
 
     derivatives = d.positionDerivative(quadratic,grid,deltaT)
-    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))pyt
+    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))
