@@ -1,9 +1,7 @@
 import pytest
-
-def line(x,m,c):
-    return m*x + c
+import InitialConditions as ic
 
 def test_line():
-    assert line(2,3,4) == 10
+    assert ic.line(2,3,4) == 10
 
 

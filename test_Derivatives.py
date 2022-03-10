@@ -11,7 +11,7 @@ def test_positionDerivatives():
     deltaX = 0.1
 
     derivatives = d.positionDerivative(quadratic,grid,deltaX)
-    np.testing.assert_array_equal(derivatives,np.arange(0.2,20,0.2,dtype = float))
+    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))
 
 def test_timesDerivatives():
     def quadratic(t):
@@ -21,8 +21,4 @@ def test_timesDerivatives():
     deltaT = 0.1
 
     derivatives = d.positionDerivative(quadratic,grid,deltaT)
-    np.testing.assert_array_equal(derivatives,np.arange(0.2,20,0.2,dtype = float))
-
-
-
-    
+    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))pyt

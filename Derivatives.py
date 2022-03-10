@@ -1,5 +1,3 @@
-import Grid as g
-import Fluid as f
 import numpy as np
 
 def positionDerivative(u,grid,deltaX):
@@ -23,5 +21,9 @@ def timeDerivative(u,grid,deltaT):
             toAppend = np.array([difference/deltaT],dtype = float)
             derivatives = np.append(derivatives, toAppend,0)
     return derivatives
+
+
+
+
 
 

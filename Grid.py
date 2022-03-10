@@ -1,15 +1,22 @@
 import numpy as np
-from Fluid import Fluid
+import fluid as f
 
-def gridCreate(fluid,maxTime):
-    t = fluid.time
-    deltaT = (maxTime-t)/100
-    times = np.arange(t,maxTime+deltaT,deltaT)
 
+def positionInfo(fluid,steps):
     x = fluid.pipeLength
-    deltaX = x/100
-    positions = np.arange(0,x+deltaX,deltaX)
+    deltaX = x/steps
+    return x, deltaX
 
-    return times, positions
+def timeInfo(fluid, steps):
+    t = fluid.maxTtime
+    deltaT = t/steps
+    return t, deltaT
+def gridCreate(dx,dt):
+    
+    positions = np.arange(0,dx[0]+dx[1],dx[1])
+    times = np.arange(0,dt[0]+dx[1],dx[1])
+
+    return positions, times
+
 
 
