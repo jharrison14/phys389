@@ -14,9 +14,7 @@ def timeInfo(fluid, steps):
 def gridCreate(dx,dt):
     
     positions = np.arange(0,dx[0]+dx[1],dx[1])
-    times = np.arange(0,dt[0]+dx[1],dx[1])
+    times = np.arange(0,dt[0]+dt[1],dt[1])
 
     return positions, times
-
-
 

@@ -27,22 +27,24 @@ def finiteDifference(grid,ic):
         
         derivatives = d.positionDerivative(ic,grid,dx)
 
+        
         for index, i in enumerate(positions):
             if index == 0:
-                timeAdvancedValues = np.append(timeAdvancedValues,np.array(0,dtype = float),0)
-            elif index == -1:
-                timeAdvancedValues = np.append(timeAdvancedValues,timeAdvancedValues[-1],0)
+                timeAdvancedValues = np.append(timeAdvancedValues,np.array([ic(i)],dtype=float),0)
+            elif index == np.size(positions)-1:
+                timeAdvancedValues = np.append(timeAdvancedValues,np.array([timeAdvancedValues[-1]],dtype=float),0)
             else:
-                toAppend = np.array(ic(i)-(ic(i)*dt*derivatives[index-1]),dtype=float)
-                timeAdvancedValues = np.append(timeAdvancedValues,toAppend,0)
-        
+                timeJump = ic(i)-(ic(i)*dt*derivatives[index-1])
+                toAppend = np.array([timeJump],dtype=float)
+                timeAdvancedValues = np.append(timeAdvancedValues,toAppend,0)  
+
         return timeAdvancedValues
-        
 
 dx = g.positionInfo(f.Fluid(),100)
-dt = g.timeInfo(f.Fluid(),100)
+dt = g.timeInfo(f.Fluid(),1000)
 grid = g.gridCreate(dx,dt)
 
 print(finiteDifference(grid,ic.line))
+
 
 
