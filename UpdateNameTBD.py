@@ -5,21 +5,27 @@ import Grid as g
 import Fluid as f 
 import InitialConditions as ic
 
-tophatFluid = f.Fluid("Top-Hat",0,10,10)
+lineFluid = f.Fluid("Line",0,10,5)
 
-positions = g.positionInfo(tophatFluid,100)
-times = g.timeInfo(tophatFluid,1000)
+positions = g.positionInfo(lineFluid,100)
+times = g.timeInfo(lineFluid,10000)
 grid = g.gridCreate(positions,times)
 
+currentSpeed = iv.initialSpeeds(ic.line,grid)
 
-d = {}
-df = pd.DataFrame(data=d)
-currentSpeeds = iv.initialSpeeds(ic.two_top_hat,grid).tolist()
-for i in grid[1]:
-    if i == 0:
-        toUpdate = {"%s"%(i):currentSpeeds}
-        d.update(toUpdate)
+
+
+
+
+for index, i in enumerate(grid[1]):
+    if index == 0:
+        print(currentSpeed)
+    elif i % 1 == 0:
+        currentSpeed = iv.finiteDifference(grid,currentSpeed)
+        print("t=%s"%(i))
+        print(currentSpeed)
     else:
-        print("Nope")
+        currentSpeed = iv.finiteDifference(grid,currentSpeed)
+        
 
-print(df)
+

@@ -15,7 +15,7 @@ def initialSpeeds(u,grid):
     return speeds
 
 
-def finiteDifference(grid,ic):
+def finiteDifference(grid,u):
         
         timeAdvancedValues = np.empty((0,), dtype = float)
 
@@ -25,26 +25,32 @@ def finiteDifference(grid,ic):
         dx = positions[1]-positions[0]
         dt = times[1]-times[0]
         
-        derivatives = d.positionDerivative(ic,grid,dx)
+        derivatives = d.positionDerivative(u,dx)
 
         
-        for index, i in enumerate(positions):
+        for index, i in enumerate(u):
             if index == 0:
-                timeAdvancedValues = np.append(timeAdvancedValues,np.array([ic(i)],dtype=float),0)
-            elif index == np.size(positions)-1:
+                timeAdvancedValues = np.append(timeAdvancedValues,np.array([i],dtype=float),0)
+            elif index == np.size(u)-1:
                 timeAdvancedValues = np.append(timeAdvancedValues,np.array([timeAdvancedValues[-1]],dtype=float),0)
             else:
-                timeJump = ic(i)-(ic(i)*dt*derivatives[index-1])
+                timeJump = i-(i*dt*derivatives[index-1])
                 toAppend = np.array([timeJump],dtype=float)
                 timeAdvancedValues = np.append(timeAdvancedValues,toAppend,0)  
 
         return timeAdvancedValues
 
-dx = g.positionInfo(f.Fluid(),100)
-dt = g.timeInfo(f.Fluid(),1000)
-grid = g.gridCreate(dx,dt)
+"""
+lineFluid = f.Fluid("Line",0,10,10)
 
-print(finiteDifference(grid,ic.line))
+positions = g.positionInfo(lineFluid,100)
+times = g.timeInfo(lineFluid,1000)
+grid = g.gridCreate(positions,times)
+
+currentSpeed = initialSpeeds(ic.line,grid)
+
+timeAdvancedOnce = finiteDifference(grid,)
+"""
 
 
 
