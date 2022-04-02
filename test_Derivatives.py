@@ -1,24 +1,23 @@
-import Grid as g
-import Fluid as f 
-import numpy as np 
+import pytest
+import Fluid as f
 import Derivatives as d
+import Grid as g
+import numpy as np
 
-def test_positionDerivatives():
-    def quadratic(x):
-        return x**2
 
-    grid = g.gridCreate(f.Fluid(),10)
-    deltaX = 0.1
+testFluid = f.Fluid("Test",10,10,100,100)    
+grid = g.gridCreate(testFluid.positionInfo(),testFluid.timeInfo())
 
-    derivatives = d.positionDerivative(quadratic,grid,deltaX)
-    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))
 
-def test_timesDerivatives():
-    def quadratic(t):
-        return t**2
+def quadratic(x):
+    return x**2
 
-    grid = g.gridCreate(f.Fluid(),10)
-    deltaT = 0.1
+quadraticValues = np.empty((0,),dtype=float)
+for i in grid[0]:
+    quadraticValues = np.append(quadraticValues,np.array([quadratic(i)],dtype=float),0)
 
-    derivatives = d.positionDerivative(quadratic,grid,deltaT)
-    np.isclose(derivatives,np.arange(0.2,20,0.2,dtype = float))
+    
+def test_Derivatives():
+    quadraticDerivative = d.positionDerivative(quadraticValues,testFluid.positionInfo()[1])
+    np.isclose(quadraticDerivative,np.arange(0.2,20.,0.2,dtype=float))
+

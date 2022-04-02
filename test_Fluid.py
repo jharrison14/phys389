@@ -1,9 +1,11 @@
 import Fluid as f 
-import numpy as np 
+import pytest 
 
-def test_string():
+def test_positionInfo():
     default = f.Fluid()
-    assert default == "Fluid: {0}, Viscosity: {1:.3e}, Velocity {2}, Time {3}, Pipe Length {4}".format(
-        "Water", 1.0, np.array([1,0,0],dtype = float), 0, 10.0)
+    assert default.positionInfo() == (10.0, 0.01)
 
-print(f.Fluid())
+def test_timeInfo():
+    default = f.Fluid()
+    assert default.timeInfo() == (10.0, 10.0/30000)
+

@@ -1,12 +1,12 @@
-import UpdateNameTBD as u 
+import InviscidUpdate as u 
 import numpy as np
 from os import path
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+
 
 
 if path.exists("InviscidData.npy"):
-    print("The file InviscidData.npy has been created.")
+    print("The file InviscidData.npy has been created.") #indicates whether data-set has been successfuly imported
 else:
     raise ValueError("The file InviscidData.npy cannot be found or is in the wrong directory")
 
@@ -14,12 +14,13 @@ else:
 print("testing reading it back in")
 DataIn = np.load("InviscidData.npy", allow_pickle=True)
 
-x = u.grid[0]
+x = u.grid[0] #defines x values of plot
 
-for index, i in enumerate(DataIn):
-    plt.plot(x,i)
+for index, i in enumerate(DataIn): #iterates through dataset
+    plt.plot(x,i)#plots each curve in dataset
 
-plt.xlabel('Time (s)')
-plt.ylabel('Speed (m/s)')
-plt.legend()
-plt.show()
+
+plt.xlabel('Position (m))') #defines label of x values
+plt.ylabel('Speed (m/s)') #defines label for y values
+plt.show() #displays plot
+
